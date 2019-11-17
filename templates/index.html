@@ -8,36 +8,24 @@
 
 <h1>Trips</h1>
 
-<p>Current cash = ${{cash}}</p>
-<p>Grand total (cash + stock value) = ${{grand_total}}</p>
-
-<table class="table">
-    <thead>
-        <th scope="col">Stocks</th>
-        <th scope="col">Number owned</th>
-        <th scope="col">Current price</th>
-        <th scope="col">Total value</th>
-    </thead>
-    <tbody>
-
-    {% for stock in stocks %}
-        <tr>
-          <td>{{ stock["symbol"] }}</td>
-          <td>{{ stock["amount"] }}</td>
-          <td>{{ stock["current_price"] | usd}}</td>
-          <td>{{ stock["total_value"] | usd}}</td>
-        </tr>
-
-    {% endfor %}
-
-    </tbody>
+<div class="row">
 
 
 
+{% for trip in trips %}
 
-</table>
+<div class="card col-lg-4" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{trip["destination"]}}</h5>
+    <p class="card-text">{{trip["start_date"]}} to {{trip["end_date"]}}</p>
+    <a href="#" class="btn btn-primary">Edit</a>
+  </div>
+</div>
 
+{% endfor %}
 
+</div>
 
 
 

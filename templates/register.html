@@ -19,21 +19,21 @@
     </form>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--    <script>-->
 
-let username = document.getElementById("username").value
-document.querySelector("form").onsubmit = function(event) {
-    event.preventDefault();
-    $.get("/check?username=" + username, function(data){
-        if (data === true){
-          alert("Sorry - that username is taken!");
-            }
-            else {
-                $('#form').submit();
-            }
-    });
-}
-</script>
+<!--let username = document.getElementById("username").value-->
+<!--document.querySelector("form").onsubmit = function(event) {-->
+<!--    event.preventDefault();-->
+<!--    $.get("/check?username=" + username, function(data){-->
+<!--        if (data === true){-->
+<!--          alert("Sorry - that username is taken!");-->
+<!--            }-->
+<!--            else {-->
+<!--                $('#form').submit();-->
+<!--            }-->
+<!--    });-->
+<!--}-->
+<!--</script>-->
 
 {% endblock %}
