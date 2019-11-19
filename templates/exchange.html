@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Exchange Rate
+{% endblock %}
+
+{% block main %}
+
+<h1>Exchange rate</h1>
+
+<form action"/create" method="post">
+    <input autocomplete="off" autofocus class="form-control" name="start_currency" placeholder="From" type="text">
+    <input autocomplete="off" autofocus class="form-control" name="end_currency" placeholder ="To" type="text">
+    <input autocomplete="off" autofocus class="form-control" name="amount" placeholder ="Amount" type="text">
+    <br>
+    <br>
+    <button buttonclass="btn btn-primary" type="submit">Add</button>
+
+</form>
+
+
+
+{% endblock %}

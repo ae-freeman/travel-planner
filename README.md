@@ -24,6 +24,7 @@ This application is my capstone project for Harvard cs50.
 - Home page
     - Display each trip for logged in user in a card with relevant details and image
     - Edit button
+    - Styling of cards
 - Edit page
     - Input form
     - Update database
@@ -34,3 +35,4 @@ This application is my capstone project for Harvard cs50.
     - POST request: Display converted currency (rounded to 2 d.p.)
 - POSSIBLE OTHER OPTIONS
     - Accomodation details on the card: in a different table?
+    - File upload for bookings etc

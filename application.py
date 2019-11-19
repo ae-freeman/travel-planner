@@ -8,7 +8,8 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from helpers import apology, login_required, lookup
+
+from helpers import apology, login_required, lookup, exchange_rate
 
 
 # Configure application
@@ -42,15 +43,31 @@ db = SQL("sqlite:///travel.db")
 #     raise RuntimeError("API_KEY not set")
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
 
-    trips = db.execute("SELECT destination, start_date, end_date FROM trips WHERE user_id = :user_id", user_id=session["user_id"])
-    print(trips[0]["destination"])
+    if request.method == "GET":
+        trips = db.execute("SELECT trip_id, destination, start_date, end_date FROM trips WHERE user_id = :user_id", user_id=session["user_id"])
+        print(trips[0]["destination"])
 
 
-    return render_template("index.html", trips=trips)
+        return render_template("index.html", trips=trips)
+
+    else:
+        trip_id = request.form.get("trip_id")
+
+        trip_to_edit = db.execute("SELECT destination, start_date, end_date from trips WHERE trip_id=:trip_id", trip_id = trip_id)
+        print(trip_to_edit)
+
+        return render_template("edit.html", trip = trip_to_edit)
+
+
+# @app.route("/edit", methods=["POST"])
+# @login_required
+# def edit():
+
+
 
 #Check date format format
 def date_check(month, day):
@@ -92,7 +109,8 @@ def create():
         end_month = int(end_date[5:7])
         end_day = int(end_date[8:10])
 
-
+        image = lookup(destination)
+        print(image)
 
 
 
@@ -105,9 +123,34 @@ def create():
     else:
         return render_template("create.html")
 
+# @app.route("/edit", methods=["GET", "POST"])
+# @login_required
+# def edit():
+
+#     if request.method == "POST":
+
+#     else:
+#         trip = db.execute("SELECT * FROM trips WHERE trip_id=:id", id =)
+
+@app.route("/exchange", methods=["GET", "POST"])
+@login_required
+def exchange():
+
+    if request.method == "POST":
+
+        start_currency = request.form.get("start_currency")
+        end_currency = request.form.get("end_currency")
+        amount = request.form.get("amount")
+
+        response = exchange_rate()
+        print(response.text)
 
 
 
+        return render_template("exchange-post.html")
+
+    else:
+        return render_template("exchange.html")
 
 
 # @app.route("/history")

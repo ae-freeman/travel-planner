@@ -33,29 +33,58 @@ def login_required(f):
     return decorated_function
 
 
-def lookup(symbol):
+def lookup(destination):
     """Look up quote for symbol."""
+    # url = "https://api.unsplash.com/search/photos"
+    # params =
+
+    response = requests.get(f"https://api.unsplash.com/search/photos", params={"query": {destination}}, headers={"Authorization": "Client-ID api key"})
+    print(response)
+    # response = requests.get(f"https://api.unsplash.com/search/photos?query={destination}&&client_id=api_key")
+    # print(response)
 
     # Contact API
-    try:
-        api_key = os.environ.get("API_KEY")
-        response = requests.get(f"https://cloud-sse.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
-        response.raise_for_status()
-    except requests.RequestException:
-        return None
+    # try:
+    #     # api_key = os.environ.get("API_KEY")
 
-    # Parse response
-    try:
-        quote = response.json()
-        return {
-            "name": quote["companyName"],
-            "price": float(quote["latestPrice"]),
-            "symbol": quote["symbol"]
-        }
-    except (KeyError, TypeError, ValueError):
-        return None
+    #     response.raise_for_status()
+    # except requests.RequestException:
+    #     return None
+
+
+        #try pre-defining url params and headers then passing into get request
+
+    # # Parse response
+    # try:
+    #     quote = response.json()
+    #     return {
+    #         "name": quote["companyName"],
+    #         "price": float(quote["latestPrice"]),
+    #         "symbol": quote["symbol"]
+    #     }
+    # except (KeyError, TypeError, ValueError):
+    #     return None
 
 
 # def usd(value):
 #     """Format value as USD."""
 #     return f"${value:,.2f}"
+
+
+
+
+
+#Exchange Rates API
+
+def exchange_rate():
+
+    try:
+        response = requests.get("https://api.exchangeratesapi.io/latest")
+        response.raise_for_status()
+        return response
+    except requests.RequestException:
+        return None
+
+    # test_response = requests.get("https://api.exchangeratesapi.io/latest")
+    # return test_response
+

@@ -19,13 +19,18 @@
   <div class="card-body">
     <h5 class="card-title">{{trip["destination"]}}</h5>
     <p class="card-text">{{trip["start_date"]}} to {{trip["end_date"]}}</p>
-    <a href="#" class="btn btn-primary">Edit</a>
+    <form action"/" method="post">
+      <button buttonclass="btn btn-primary" type="submit" name="trip_id" value='{{trip["trip_id"]}}' >Edit</button>
+    </form>
   </div>
 </div>
 
 {% endfor %}
 
 </div>
+
+
+
 
 
 
