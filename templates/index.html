@@ -15,12 +15,12 @@
 {% for trip in trips %}
 
 <div class="card col-lg-4" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  <img class = "image-custom" src='{{trip["image_url"]}}' class="card-img-top" alt='{{trip["alt_description"]}}'>
   <div class="card-body">
     <h5 class="card-title">{{trip["destination"]}}</h5>
     <p class="card-text">{{trip["start_date"]}} to {{trip["end_date"]}}</p>
     <form action"/" method="post">
-      <button buttonclass="btn btn-primary" type="submit" name="trip_id" value='{{trip["trip_id"]}}' >Edit</button>
+      <button buttonclass="btn btn-primary" type="submit" name="trip_id" value='{{trip["trip_id"]}}'>Edit</button>
     </form>
   </div>
 </div>
@@ -35,3 +35,4 @@
 
 
 {% endblock %}
+

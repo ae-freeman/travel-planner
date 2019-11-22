@@ -1,7 +1,7 @@
 ### Travel Planner
 
 <br/>
-<br/>
+
 
 This application is my capstone project for Harvard cs50.
 
@@ -16,13 +16,13 @@ This application is my capstone project for Harvard cs50.
 - Create a trip page
     - Input form x
     - Have visual calendar for date selection
-    - Error checking
-    - Check date is the correct format
+    - Error checking x
+    - Check date is the correct format x
     - Add form details to database x
-    - Make api call for photo corresponding to API
-    - Add photo url to database
+    - Make api call for photo corresponding to API x
+    - Add photo url to database x
 - Home page
-    - Display each trip for logged in user in a card with relevant details and image
+    - Display each trip for logged in user in a card with relevant details and image x
     - Edit button
     - Styling of cards
 - Edit page

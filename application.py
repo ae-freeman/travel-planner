@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
 
-from helpers import apology, login_required, lookup, exchange_rate
+from helpers import apology, login_required, lookup, exchange_rate, format
 
 
 # Configure application
@@ -48,8 +48,8 @@ db = SQL("sqlite:///travel.db")
 def index():
 
     if request.method == "GET":
-        trips = db.execute("SELECT trip_id, destination, start_date, end_date FROM trips WHERE user_id = :user_id", user_id=session["user_id"])
-        print(trips[0]["destination"])
+        trips = db.execute("SELECT trip_id, destination, start_date, end_date, image_url, alt_description FROM trips WHERE user_id = :user_id", user_id=session["user_id"])
+        print(trips[0]["image_url"])
 
 
         return render_template("index.html", trips=trips)
@@ -110,13 +110,15 @@ def create():
         end_day = int(end_date[8:10])
 
         image = lookup(destination)
-        print(image)
+        image_url = (image["urls"]["regular"])
+        alt_description = (image["alt_description"])
+        print(alt_description)
 
 
 
 
-        db.execute("INSERT INTO trips (user_id, destination, start_date, end_date) VALUES (:user_id, :destination, :start_date, :end_date)",
-        user_id=session["user_id"], destination=destination, start_date=start_date, end_date=end_date)
+        db.execute("INSERT INTO trips (user_id, destination, start_date, end_date, image_url, alt_description) VALUES (:user_id, :destination, :start_date, :end_date, :image_url, :alt_description)",
+        user_id=session["user_id"], destination=destination, start_date=start_date, end_date=end_date, image_url=image_url, alt_description=alt_description)
 
         return render_template("index.html")
 
@@ -138,16 +140,23 @@ def exchange():
 
     if request.method == "POST":
 
-        start_currency = request.form.get("start_currency")
-        end_currency = request.form.get("end_currency")
+        #Parse form inputs
+        start_currency = request.form.get("start_currency").upper()
+        end_currency = request.form.get("end_currency").upper()
         amount = request.form.get("amount")
 
-        response = exchange_rate()
-        print(response.text)
+        #Make api call
+        response = exchange_rate(start_currency, end_currency)
 
+        #Get the exchange rate from the result
+        rate = list((response["rates"].values()))
 
+        #Multiply the exchange rate by the amount (start_currency is the base, amount multiplied by rate for end_currency)
+        final_amount = (rate[0] * float(amount))
 
-        return render_template("exchange-post.html")
+        final_amount_2dp = "%.2f" % final_amount
+
+        return render_template("exchange-post.html", start_currency = start_currency, end_currency = end_currency, amount = amount, final_amount = final_amount_2dp)
 
     else:
         return render_template("exchange.html")
