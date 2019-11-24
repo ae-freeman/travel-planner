@@ -49,3 +49,17 @@ main img
 .image-custom {
     padding: 2.5% 0%;
 }
+
+.nav-custom {
+    background-color: #1f6650;
+}
+
+
+
+.photo-background {
+    background-image: url("./images/travel-background-min.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
+}

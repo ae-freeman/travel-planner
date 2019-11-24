@@ -48,7 +48,7 @@ db = SQL("sqlite:///travel.db")
 def index():
 
     if request.method == "GET":
-        trips = db.execute("SELECT trip_id, destination, start_date, end_date, image_url, alt_description FROM trips WHERE user_id = :user_id", user_id=session["user_id"])
+        trips = db.execute("SELECT trip_id, destination, start_date, end_date, image_url, alt_description FROM trips WHERE user_id = :user_id ORDER BY start_date ASC", user_id=session["user_id"])
         print(trips[0]["image_url"])
 
 
@@ -57,16 +57,34 @@ def index():
     else:
         trip_id = request.form.get("trip_id")
 
-        trip_to_edit = db.execute("SELECT destination, start_date, end_date from trips WHERE trip_id=:trip_id", trip_id = trip_id)
-        print(trip_to_edit)
+        rows = db.execute("SELECT destination, start_date, end_date, trip_id from trips WHERE trip_id=:trip_id", trip_id = trip_id)
+
+        trip_to_edit = (rows[0])
+
 
         return render_template("edit.html", trip = trip_to_edit)
 
 
-# @app.route("/edit", methods=["POST"])
-# @login_required
-# def edit():
 
+
+@app.route("/edit", methods=["GET", "POST"])
+@login_required
+def edit():
+    if request.method == "POST":
+
+        new_destination = request.form.get("destination")
+        new_start_date = request.form.get("start_date")
+        new_end_date = request.form.get("end_date")
+        trip_id = request.form.get("trip_id")
+
+        print(trip_id)
+
+        db.execute("UPDATE trips SET destination = :new_destination, start_date = :new_start_date, end_date = :new_end_date WHERE trip_id = :trip_id", new_destination = new_destination, new_start_date = new_start_date, new_end_date = new_end_date, trip_id = trip_id)
+
+        return render_template("edit-complete.html")
+
+    else:
+        return render_template("index.html")
 
 
 #Check date format format
@@ -109,6 +127,8 @@ def create():
         end_month = int(end_date[5:7])
         end_day = int(end_date[8:10])
 
+        ####error check end month and day
+
         image = lookup(destination)
         image_url = (image["urls"]["regular"])
         alt_description = (image["alt_description"])
@@ -120,7 +140,7 @@ def create():
         db.execute("INSERT INTO trips (user_id, destination, start_date, end_date, image_url, alt_description) VALUES (:user_id, :destination, :start_date, :end_date, :image_url, :alt_description)",
         user_id=session["user_id"], destination=destination, start_date=start_date, end_date=end_date, image_url=image_url, alt_description=alt_description)
 
-        return render_template("index.html")
+        return redirect("/")
 
     else:
         return render_template("create.html")
@@ -129,10 +149,10 @@ def create():
 # @login_required
 # def edit():
 
-#     if request.method == "POST":
+#     # if request.method == "POST":
 
-#     else:
-#         trip = db.execute("SELECT * FROM trips WHERE trip_id=:id", id =)
+#     # else:
+#     #     trip = db.execute("SELECT destination, start_date, end_date FROM trips WHERE trip_id=:id", id =)
 
 @app.route("/exchange", methods=["GET", "POST"])
 @login_required

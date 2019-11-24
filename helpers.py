@@ -46,7 +46,7 @@ def lookup(destination):
     #     return None
 
 
-    response = requests.get(f"https://api.unsplash.com/search/photos", params={"query": {destination}}, headers={"Authorization": "Client-ID api_key"})
+    response = requests.get(f"https://api.unsplash.com/search/photos", params={"query": {destination}}, headers={"Authorization": "Client-ID api-key"})
 
     #Parse Response
     try:

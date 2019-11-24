@@ -9,12 +9,19 @@
 <h1>Exchange rate</h1>
 
 <form action"/create" method="post">
+    <div class="form-group">
     <input autocomplete="off" autofocus class="form-control" name="start_currency" placeholder="From" type="text">
+    </div>
+
+    <div class="form-group">
     <input autocomplete="off" autofocus class="form-control" name="end_currency" placeholder ="To" type="text">
+    </div>
+
+    <div class="form-group">
     <input autocomplete="off" autofocus class="form-control" name="amount" placeholder ="Amount" type="text">
-    <br>
-    <br>
-    <button buttonclass="btn btn-primary" type="submit">Add</button>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Get new amount</button>
 
 </form>
 
