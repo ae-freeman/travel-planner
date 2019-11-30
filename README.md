@@ -23,10 +23,10 @@ This application is my capstone project for Harvard cs50.
 - Home page
     - Display each trip for logged in user in a card with relevant details and image x
     - Edit button x
-    - Styling of cards
+    - Styling of cards x
 - Edit page
     - Input form x
-    - Update database
+    - Update database x
 - Exchange rate
     - GET request: Input form with currency type input and output and amount in original currency x
     - Error check: see if those currency types exist x
