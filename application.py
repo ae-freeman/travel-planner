@@ -67,24 +67,28 @@ def index():
 
 
 
-@app.route("/edit", methods=["GET", "POST"])
+@app.route("/edit", methods=["POST"])
 @login_required
 def edit():
-    if request.method == "POST":
 
-        new_destination = request.form.get("destination")
-        new_start_date = request.form.get("start_date")
-        new_end_date = request.form.get("end_date")
-        trip_id = request.form.get("trip_id")
 
-        print(trip_id)
+    new_destination = request.form.get("destination")
+    new_start_date = request.form.get("start_date")
+    new_end_date = request.form.get("end_date")
+    trip_id = request.form.get("trip_id")
 
-        db.execute("UPDATE trips SET destination = :new_destination, start_date = :new_start_date, end_date = :new_end_date WHERE trip_id = :trip_id", new_destination = new_destination, new_start_date = new_start_date, new_end_date = new_end_date, trip_id = trip_id)
+    db.execute("UPDATE trips SET destination = :new_destination, start_date = :new_start_date, end_date = :new_end_date WHERE trip_id = :trip_id", new_destination = new_destination, new_start_date = new_start_date, new_end_date = new_end_date, trip_id = trip_id)
 
-        return render_template("edit-complete.html")
+    return render_template("edit-complete.html")
 
-    else:
-        return render_template("index.html")
+
+@app.route("/edit-complete", methods=["POST"])
+@login_required
+def edit_complete():
+
+    return redirect("/")
+
+
 
 
 #Check date format format
