@@ -136,7 +136,7 @@ def create():
         image = lookup(destination)
         image_url = (image["urls"]["regular"])
         alt_description = (image["alt_description"])
-        print(alt_description)
+        # print(alt_description)
 
 
 

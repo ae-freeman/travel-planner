@@ -15,7 +15,7 @@
 {% for trip in trips %}
 
 <div class="card col-lg-4" style="width: 18rem;">
-  <img class = "image-custom" src='{{trip["image_url"]}}' class="card-img-top" alt='{{trip["alt_description"]}}'>
+  <img class = "image-custom card-img-top" src='{{trip["image_url"]}}' class="card-img-top" alt='{{trip["alt_description"]}}'>
   <div class="card-body">
     <h5 class="card-title">{{trip["destination"]}}</h5>
     <p class="card-text">{{trip["start_date"]}} to {{trip["end_date"]}}</p>
