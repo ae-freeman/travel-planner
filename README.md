@@ -44,3 +44,7 @@ in the end currency.
 - POSSIBLE OTHER OPTIONS
     - Accomodation details on the card: in a different table?
     - File upload for bookings etc
+    
+## Screenshots
+
+![HomePage](main-page.png)
