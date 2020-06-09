@@ -14,7 +14,7 @@ To edit the trip, click on the edit button under each trip on the homepage.
 Users can also find out the exchange rate. By inputting a starting currency, ending currency and starting amount, the application will return the value
 in the end currency.
 
-### TODO:
+### Learning/Components
 - Authentication
     - Login page x
     - Register page x
