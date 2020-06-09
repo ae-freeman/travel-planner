@@ -3,7 +3,7 @@
 <br/>
 
 
-This application is my capstone project for Harvard cs50.
+This application is my capstone project for Harvard CS50.
 
 This travel planner allows the user to register and create a login. The homepage displays all your trips. To add a trip, go to the add page
 in the nav bar and fill in the destination and the date. Once added, the homepage will display the information, along with a picture of the destination
