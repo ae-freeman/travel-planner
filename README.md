@@ -48,3 +48,11 @@ in the end currency.
 ## Screenshots
 
 ![HomePage](main-page.png)
+
+![LoginPage](login-page.png)
+
+![ExchangeMoneyPage](exchange-rate-input.png)
+
+![ExchangeRateResult](exchange-result.png)
+
+![AddTrip](add-trip.png)
